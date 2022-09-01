@@ -5,19 +5,22 @@ import argparse
 from itertools import product
 from sklearn.metrics import roc_auc_score
 from torch.utils.data import DataLoader, Subset
+from pathlib import Path
 
 def main(args):
     torch.manual_seed(0)
     np.random.seed(0)
     
-    logfile = "logs/runs.txt"
+    logfile = Path("logs/runs.txt")
+    if not logfile.parent.exists():
+        logfile.parent.mkdir()
     slurm_job_id = None
     if 'SLURM_JOBID' in os.environ:
         slurm_job_id = os.environ['SLURM_JOBID']
         logfile = f"logs/slurm_{slurm_job_id}.txt"
     print("Storing results in logfile", logfile)
 
-    with open(logfile, "a") as f:
+    with open(logfile, "a+") as f:
         f.write('{}\n'.format(args))
     data_dir = os.path.abspath(args.data_dir)
     for run in range(args.nruns):
