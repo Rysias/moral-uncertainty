@@ -2,6 +2,7 @@ numpy
 pandas
 transformers
 sentence-transformers
+nltk
 torch
 openai
 wandb

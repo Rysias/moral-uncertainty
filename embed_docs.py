@@ -1,5 +1,5 @@
 """
-Script for embedding the train and test sets
+Script for embedding the train and test sets (one embedding per document)
 """
 import pandas as pd
 import numpy as np
